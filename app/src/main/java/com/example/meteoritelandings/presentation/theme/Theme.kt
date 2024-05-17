@@ -1,4 +1,4 @@
-package com.example.meteoritelandings.ui.theme
+package com.example.meteoritelandings.presentation.theme
 
 import android.app.Activity
 import android.os.Build

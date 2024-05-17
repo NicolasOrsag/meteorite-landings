@@ -1,4 +1,4 @@
-package com.example.meteoritelandings.ui.theme
+package com.example.meteoritelandings.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 

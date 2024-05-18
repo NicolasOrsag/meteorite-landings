@@ -18,43 +18,19 @@ import javax.inject.Inject
 class MeteoriteListViewModel @Inject constructor(
     private val getMeteoriteListUseCase: GetMeteoriteListUseCase,
 ) : ViewModel() {
-    //private val _state = MutableStateFlow(MeteoriteListState())
-    //val state: StateFlow<MeteoriteListState> get()= _state
 
-    private val _searchText = MutableStateFlow("")
-    val searchText: StateFlow<String> = _searchText
+    private val _fullTextSearch = MutableStateFlow("")
+    val fullTextSearch: StateFlow<String> = _fullTextSearch
 
-    //val meteorites: Flow<PagingData<Meteorite>> = getMeteoriteListUseCase().cachedIn(viewModelScope)
 
-    val meteorites: Flow<PagingData<Meteorite>> = _searchText.flatMapLatest { searchText ->
+    val meteorites: Flow<PagingData<Meteorite>> = _fullTextSearch.flatMapLatest { searchText ->
         getMeteoriteListUseCase(searchText).cachedIn(viewModelScope)
     }
 
-    fun setSearchQuery(query: String) {
-        _searchText.value = query
+    fun setFullTextSearch(text: String) {
+        _fullTextSearch.value = text
     }
 
 
-//    private fun getMeteorites() {
-//        viewModelScope.launch {
-//            getMeteoriteListUseCase().collectLatest { result ->
-//                when (result) {
-//                    is Resource.Success -> {
-//                        _state.value = MeteoriteListState(meteorites = result.data ?: emptyList())
-//                    }
-//
-//                    is Resource.Error -> {
-//                        _state.value = MeteoriteListState(
-//                            error = result.message ?: "An unexpected error occured"
-//                        )
-//                    }
-//
-//                    is Resource.Loading -> {
-//                        _state.value = MeteoriteListState(isLoading = true)
-//                    }
-//                }
-//            }
-//        }
-//    }
 
 }

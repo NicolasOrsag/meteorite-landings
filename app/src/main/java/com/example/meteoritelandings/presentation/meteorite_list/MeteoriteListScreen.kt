@@ -2,21 +2,14 @@ package com.example.meteoritelandings.presentation.meteorite_list
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.meteoritelandings.presentation.meteorite_list.components.MeteoriteListItem
-import kotlinx.coroutines.flow.filter
+import com.example.meteoritelandings.presentation.util.handleLoadState
 
 @Composable
 fun MeteoriteListScreen(
@@ -27,20 +20,20 @@ fun MeteoriteListScreen(
 
     val meteorites = viewModel.meteorites.collectAsLazyPagingItems()
 
-    var text = viewModel.searchText.collectAsState()
-
+    var text = viewModel.fullTextSearch.collectAsState()
 
     Column {
-        TextField(value = text.value , onValueChange = { viewModel.setSearchQuery(it) })
+        TextField(value = text.value , onValueChange = { viewModel.setFullTextSearch(it) })
 
         LazyColumn {
+            handleLoadState(meteorites.loadState.refresh, meteorites)
+            handleLoadState(meteorites.loadState.prepend, meteorites)
             items(meteorites.itemCount){index ->
                 meteorites[index]?.let{
                     MeteoriteListItem(meteorite = it)
                 }
-
             }
-
+            handleLoadState(meteorites.loadState.append, meteorites)
         }
     }
 

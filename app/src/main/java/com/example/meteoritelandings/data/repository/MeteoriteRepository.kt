@@ -8,6 +8,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface MeteoriteRepository {
 
-    fun getMeteoriteList(): Flow<PagingData<Meteorite>>
+    fun getMeteoriteList(fullTextSearch: String = ""): Flow<PagingData<Meteorite>>
 
 }

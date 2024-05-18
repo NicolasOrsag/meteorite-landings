@@ -10,14 +10,14 @@ import com.example.meteoritelandings.domain.model.Meteorite
 import javax.inject.Inject
 
 class MeteoritePagingSource(
-    private val api: MeteoriteApi
+    private val api: MeteoriteApi,
+    private val fullTextSearch: String
 ) : PagingSource<Int, Meteorite>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Meteorite> {
         return try {
             val page = params.key ?: 0
             val offset = page * params.loadSize
-            val meteorites = api.getMeteoriteList( offset, params.loadSize)
-            Log.d("aaa", meteorites.toString())
+            val meteorites = api.getMeteoriteList( offset, params.loadSize, fullTextSearch)
             LoadResult.Page(
                 data = meteorites.map { it.toMeteorite() },
                 prevKey = if (page == 0) null else page - 1,

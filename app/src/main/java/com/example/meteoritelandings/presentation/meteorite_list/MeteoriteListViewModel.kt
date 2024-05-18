@@ -11,6 +11,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flatMapLatest
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,8 +21,18 @@ class MeteoriteListViewModel @Inject constructor(
     //private val _state = MutableStateFlow(MeteoriteListState())
     //val state: StateFlow<MeteoriteListState> get()= _state
 
-    val meteorites: Flow<PagingData<Meteorite>> = getMeteoriteListUseCase().cachedIn(viewModelScope)
+    private val _searchText = MutableStateFlow("")
+    val searchText: StateFlow<String> = _searchText
 
+    //val meteorites: Flow<PagingData<Meteorite>> = getMeteoriteListUseCase().cachedIn(viewModelScope)
+
+    val meteorites: Flow<PagingData<Meteorite>> = _searchText.flatMapLatest { searchText ->
+        getMeteoriteListUseCase(searchText).cachedIn(viewModelScope)
+    }
+
+    fun setSearchQuery(query: String) {
+        _searchText.value = query
+    }
 
 
 //    private fun getMeteorites() {

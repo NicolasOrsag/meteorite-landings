@@ -9,7 +9,8 @@ interface MeteoriteApi {
     suspend fun getMeteoriteList(
 
         @Query("\$offset") offset: Int,
-        @Query("\$limit") limit: Int
+        @Query("\$limit") limit: Int,
+        @Query("\$q") fullTextSearch: String
 
     ): List<MeteoriteDto>
 }

@@ -3,7 +3,7 @@ package com.example.meteoritelandings.di
 import com.example.meteoritelandings.data.remote.MeteoriteApi
 import com.example.meteoritelandings.data.repository.MeteoriteRepositoryImpl
 import com.example.meteoritelandings.common.Constants.BASE_URL
-import com.example.meteoritelandings.domain.repository.MeteoriteRepository
+import com.example.meteoritelandings.data.repository.MeteoriteRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

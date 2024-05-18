@@ -6,11 +6,11 @@ import java.time.LocalDateTime
 data class Meteorite(
     val fall: String,
     val id: String,
-    val mass: String?,
+    val mass: Int?,
     val name: String,
     val nametype: String,
     val recclass: String,
     val reclat: String?,
     val reclong: String?,
-    val year: String?
+    val year: Int?
 )

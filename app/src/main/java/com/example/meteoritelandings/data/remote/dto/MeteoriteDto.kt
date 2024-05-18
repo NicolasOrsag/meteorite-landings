@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.meteoritelandings.domain.model.Meteorite
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import kotlin.math.roundToInt
 
 data class MeteoriteDto(
     val fall: String,
@@ -19,15 +20,20 @@ data class MeteoriteDto(
 )
 
 fun MeteoriteDto.toMeteorite(): Meteorite{
+    val dateTime = year?.let {
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS")
+        LocalDateTime.parse(it, formatter)
+    }
+
     return Meteorite(
         id = id,
-        mass = mass,
+        mass = mass?.toDouble()?.roundToInt(),
         fall = fall,
         name = name,
         nametype = nametype,
         recclass = recclass,
         reclat = reclat,
         reclong = reclong,
-        year = year
+        year = dateTime?.year
     )
 }

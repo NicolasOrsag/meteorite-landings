@@ -10,32 +10,41 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
-private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
-)
-
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+    primary = Color(0xFF1B3A57), // Deep Space Blue
+    secondary = Color(0xFF455A64), // Comet Grey
+    tertiary = Color(0xFF82B1FF), // Meteor Blue
 
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    background = Color(0xFFE3F2FD), // Light Sky Blue Background
+    surface = Color(0xFFFFFFFF), // White Surface
+    onPrimary = Color.White, // White text on primary color
+    onSecondary = Color.White, // White text on secondary color
+    onTertiary = Color.Black, // Black text on tertiary color
+    onBackground = Color.Black, // Black text on background
+    onSurface = Color.Black // Black text on surface
 )
+
+
+private val DarkColorScheme = darkColorScheme(
+    primary = Color(0xFF82B1FF), // Meteor Blue
+    secondary = Color(0xFF455A64), // Comet Grey
+    tertiary = Color(0xFF1B3A57), // Deep Space Blue
+
+    background = Color(0xFF0D1B2A), // Deep Space Background
+    surface = Color(0xFF1B263B), // Dark Surface
+    onPrimary = Color.Black, // Black text on primary color
+    onSecondary = Color.White, // White text on secondary color
+    onTertiary = Color.White, // White text on tertiary color
+    onBackground = Color.White, // White text on background
+    onSurface = Color.White // White text on surface
+)
+
 
 @Composable
 fun MeteoriteLandingsTheme(

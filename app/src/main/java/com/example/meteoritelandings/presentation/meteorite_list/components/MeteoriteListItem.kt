@@ -1,29 +1,56 @@
 package com.example.meteoritelandings.presentation.meteorite_list.components
 
 import android.graphics.Paint.Align
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import com.example.meteoritelandings.domain.model.Meteorite
 import kotlin.math.roundToInt
 
 @Composable
 fun MeteoriteListItem(meteorite: Meteorite) {
-    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+            .background(MaterialTheme.colorScheme.surface)
+            .padding(16.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Column(modifier = Modifier.weight(1f)) {
+            Text(
+                text = meteorite.name,
+                style = MaterialTheme.typography.headlineSmall,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+        }
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .padding(start = 8.dp, end = 8.dp),
+        horizontalAlignment = Alignment.End
+        ) {
         Text(
-            text = meteorite.name, modifier = Modifier.weight(1f)
+            text = "Mass: ${meteorite.mass?.let { "${it}g" } ?: "Unknown"}",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
         )
         Text(
-            text = "${meteorite.mass ?: "Unknown"}", modifier = Modifier.weight(0.5f)
+            text = "Year: ${meteorite.year ?: "Unknown"}",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
         )
-        Text(
-            text = "${meteorite.year ?: "Unknown"}",
-            modifier = Modifier.weight(0.5f),
-            textAlign = TextAlign.End
-        )
+    }
     }
 }

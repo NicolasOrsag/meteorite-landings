@@ -7,10 +7,9 @@ import retrofit2.http.Query
 interface MeteoriteApi {
     @GET("gh4g-9sfh.json")
     suspend fun getMeteoriteList(
-
         @Query("\$offset") offset: Int,
         @Query("\$limit") limit: Int,
-        @Query("\$q") fullTextSearch: String
-
+        @Query("\$q") fullTextSearch: String,
+        @Query("\$order") order: String
     ): List<MeteoriteDto>
 }

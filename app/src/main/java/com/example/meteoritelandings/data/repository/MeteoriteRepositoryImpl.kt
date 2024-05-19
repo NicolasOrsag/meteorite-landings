@@ -17,10 +17,10 @@ class MeteoriteRepositoryImpl @Inject constructor(
 ) : MeteoriteRepository {
 
 
-    override fun getMeteoriteList(fullTextSearch: String): Flow<PagingData<Meteorite>> {
+    override fun getMeteoriteList(fullTextSearch: String, order: String): Flow<PagingData<Meteorite>> {
         return Pager(
             config = PagingConfig(PAGE_SIZE, enablePlaceholders = false),
-            pagingSourceFactory = {MeteoritePagingSource(api, fullTextSearch)}
+            pagingSourceFactory = {MeteoritePagingSource(api, fullTextSearch, order)}
         ).flow
     }
 

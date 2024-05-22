@@ -1,8 +1,8 @@
 package com.example.meteoritelandings.domain.model
 
-import com.example.meteoritelandings.data.remote.dto.Geolocation
-import java.time.LocalDateTime
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Meteorite(
     val fall: String,
     val id: String,

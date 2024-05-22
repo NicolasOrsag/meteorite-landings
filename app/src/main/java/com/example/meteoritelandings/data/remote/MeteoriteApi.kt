@@ -10,6 +10,12 @@ interface MeteoriteApi {
         @Query("\$offset") offset: Int,
         @Query("\$limit") limit: Int,
         @Query("\$q") fullTextSearch: String,
-        @Query("\$order") order: String
+        @Query("\$order") order: String,
     ): List<MeteoriteDto>
+
+    @GET("gh4g-9sfh.json")
+    suspend fun getMeteorite(
+        @Query("name") name: String,
+    ): List<MeteoriteDto>
+
 }

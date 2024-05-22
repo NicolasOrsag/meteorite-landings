@@ -86,6 +86,10 @@ dependencies {
     implementation ("androidx.paging:paging-runtime-ktx:3.3.0")
     implementation ("androidx.paging:paging-compose:3.3.0")
 
+    //serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")
+
+
 }
 
 kapt {

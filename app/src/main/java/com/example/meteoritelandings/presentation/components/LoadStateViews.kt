@@ -1,4 +1,4 @@
-package com.example.meteoritelandings.presentation.meteorite_list.components
+package com.example.meteoritelandings.presentation.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

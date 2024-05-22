@@ -42,6 +42,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.meteoritelandings.presentation.meteorite_list.components.MeteoriteListItem
+import com.example.meteoritelandings.presentation.navigation.Screen
 import com.example.meteoritelandings.presentation.util.handleLoadState
 
 
@@ -63,7 +64,7 @@ fun MeteoriteListScreen(
                 titleContentColor = MaterialTheme.colorScheme.onPrimary
             )
         )
-    }, content = { paddingValues ->
+    }) { paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -152,13 +153,17 @@ fun MeteoriteListScreen(
                 handleLoadState(meteorites.loadState.prepend, meteorites)
                 items(meteorites.itemCount) { index ->
                     meteorites[index]?.let { meteorite ->
-                        MeteoriteListItem(meteorite = meteorite)
+                        MeteoriteListItem(meteorite = meteorite, onMeteoriteClick = {
+                            navController.navigate(
+                                Screen.MeteoriteDetail.withArgs(it)
+                            )
+                        })
                         Divider(color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f))
                     }
                 }
                 handleLoadState(meteorites.loadState.append, meteorites)
             }
         }
-    })
+    }
 }
 

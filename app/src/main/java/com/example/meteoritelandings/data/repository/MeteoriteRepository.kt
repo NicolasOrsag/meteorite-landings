@@ -10,4 +10,6 @@ interface MeteoriteRepository {
 
     fun getMeteoriteList(fullTextSearch: String = "", order: String = ""): Flow<PagingData<Meteorite>>
 
+    fun getMeteorite(name: String): Flow<Resource<Meteorite>>
+
 }

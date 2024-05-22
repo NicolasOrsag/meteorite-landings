@@ -9,7 +9,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.meteoritelandings.domain.model.Meteorite
+import com.example.meteoritelandings.presentation.meteorite_detail.MeteoriteDetailScreen
 import com.example.meteoritelandings.presentation.meteorite_list.MeteoriteListScreen
+import com.example.meteoritelandings.presentation.navigation.Navigation
 import com.example.meteoritelandings.presentation.theme.MeteoriteLandingsTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,12 +22,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MeteoriteLandingsTheme {
-                val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = "meteorite_list_screen"){
-                    composable("meteorite_list_screen"){
-                        MeteoriteListScreen(navController = navController)
-                    }
-                }
+                Navigation()
             }
         }
     }

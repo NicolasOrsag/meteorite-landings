@@ -1,8 +1,5 @@
 package com.example.meteoritelandings.domain.model
 
-import kotlinx.serialization.Serializable
-
-@Serializable
 data class Meteorite(
     val fall: String,
     val id: String,

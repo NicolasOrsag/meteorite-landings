@@ -5,6 +5,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.meteoritelandings.common.Resource
+import com.example.meteoritelandings.domain.model.Meteorite
 import com.example.meteoritelandings.domain.use_case.GetMeteoriteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,17 +17,18 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MeteoriteDetailViewModel @Inject constructor(
-    private val getMeteoriteUseCase: GetMeteoriteUseCase,
-    savedStateHandle: SavedStateHandle
+    private val getMeteoriteUseCase: GetMeteoriteUseCase, savedStateHandle: SavedStateHandle
 ) : ViewModel() {
-
 
     private val _state: MutableStateFlow<MeteoriteDetailScreenState> =
         MutableStateFlow(MeteoriteDetailScreenState.Loading())
     val state: StateFlow<MeteoriteDetailScreenState> = _state
 
+    private var name: String? = null
+
     init {
         savedStateHandle.get<String>("name")?.let {
+            name = it
             getMeteorite(it)
         }
     }
@@ -54,6 +56,11 @@ class MeteoriteDetailViewModel @Inject constructor(
 
             }
         }
+    }
 
+    fun retry() {
+        name?.let {
+            getMeteorite(it)
+        }
     }
 }

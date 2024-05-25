@@ -5,14 +5,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import androidx.paging.filter
 import com.example.meteoritelandings.domain.model.Meteorite
 import com.example.meteoritelandings.domain.use_case.GetMeteoriteListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 
@@ -29,14 +32,30 @@ class MeteoriteListViewModel @Inject constructor(
     val sortOption: StateFlow<SortOption> = _sortOption
 
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     val meteorites: Flow<PagingData<Meteorite>> = combine(
         _fullTextSearch,
         _sortOption
     ) { searchText, sortOption ->
         Pair(searchText, sortOption)
     }.flatMapLatest { (searchText, sortOption) ->
-        getMeteoriteListUseCase(searchText, sortOption.stringValue).cachedIn(viewModelScope)
+        getMeteoriteListUseCase(searchText, sortOption.stringValue)
+            .map { pagingData ->
+                applyFilters(pagingData, sortOption.stringValue)
+            }
+            .cachedIn(viewModelScope)
     }
+
+    private fun applyFilters(pagingData: PagingData<Meteorite>, sortOption: String): PagingData<Meteorite> {
+        return pagingData.filter { meteorite ->
+            when {
+                sortOption.contains("mass") && meteorite.mass == null -> false
+                sortOption.contains("year") && meteorite.year == null -> false
+                else -> true
+            }
+        }
+    }
+
     fun setFullTextSearch(text: String) {
         _fullTextSearch.value = text
     }

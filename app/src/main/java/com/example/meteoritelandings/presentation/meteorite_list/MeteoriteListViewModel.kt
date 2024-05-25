@@ -19,7 +19,6 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 
-
 @HiltViewModel
 class MeteoriteListViewModel @Inject constructor(
     private val getMeteoriteListUseCase: GetMeteoriteListUseCase,
@@ -46,7 +45,10 @@ class MeteoriteListViewModel @Inject constructor(
             .cachedIn(viewModelScope)
     }
 
-    private fun applyFilters(pagingData: PagingData<Meteorite>, sortOption: String): PagingData<Meteorite> {
+    private fun applyFilters(
+        pagingData: PagingData<Meteorite>,
+        sortOption: String
+    ): PagingData<Meteorite> {
         return pagingData.filter { meteorite ->
             when {
                 sortOption.contains("mass") && meteorite.mass == null -> false

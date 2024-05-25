@@ -1,13 +1,10 @@
 package com.example.meteoritelandings.data.pagination
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.meteoritelandings.data.remote.MeteoriteApi
 import com.example.meteoritelandings.data.remote.dto.toMeteorite
-import com.example.meteoritelandings.data.repository.MeteoriteRepositoryImpl
 import com.example.meteoritelandings.domain.model.Meteorite
-import javax.inject.Inject
 
 class MeteoritePagingSource(
     private val api: MeteoriteApi,
@@ -18,7 +15,7 @@ class MeteoritePagingSource(
         return try {
             val page = params.key ?: 0
             val offset = page * params.loadSize
-            val meteorites = api.getMeteoriteList( offset, params.loadSize, fullTextSearch, order)
+            val meteorites = api.getMeteoriteList(offset, params.loadSize, fullTextSearch, order)
             LoadResult.Page(
                 data = meteorites.map { it.toMeteorite() },
                 prevKey = if (page == 0) null else page - 1,

@@ -11,13 +11,14 @@ fun LazyListScope.handleLoadState(state: LoadState, meteorites: LazyPagingItems<
     when (state) {
         is LoadState.NotLoading -> Unit
         is LoadState.Loading -> {
-            item{
+            item {
                 LoadingView()
             }
         }
+
         is LoadState.Error -> {
-            item{
-                ErrorView(state.error.message ?: "Unknown error", {meteorites.retry()})
+            item {
+                ErrorView(state.error.message ?: "Unknown error", { meteorites.retry() })
             }
         }
     }

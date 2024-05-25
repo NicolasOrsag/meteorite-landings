@@ -1,9 +1,9 @@
 package com.example.meteoritelandings.di
 
-import com.example.meteoritelandings.data.remote.MeteoriteApi
-import com.example.meteoritelandings.data.repository.MeteoriteRepositoryImpl
 import com.example.meteoritelandings.common.Constants.BASE_URL
+import com.example.meteoritelandings.data.remote.MeteoriteApi
 import com.example.meteoritelandings.data.repository.MeteoriteRepository
+import com.example.meteoritelandings.data.repository.MeteoriteRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

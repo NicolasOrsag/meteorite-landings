@@ -1,11 +1,9 @@
 package com.example.meteoritelandings.presentation.meteorite_detail
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.meteoritelandings.common.Resource
-import com.example.meteoritelandings.domain.model.Meteorite
 import com.example.meteoritelandings.domain.use_case.GetMeteoriteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

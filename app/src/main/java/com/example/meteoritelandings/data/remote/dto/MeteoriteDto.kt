@@ -1,6 +1,5 @@
 package com.example.meteoritelandings.data.remote.dto
 
-import android.util.Log
 import com.example.meteoritelandings.domain.model.Meteorite
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -19,7 +18,7 @@ data class MeteoriteDto(
     val year: String
 )
 
-fun MeteoriteDto.toMeteorite(): Meteorite{
+fun MeteoriteDto.toMeteorite(): Meteorite {
     val dateTime = year?.let {
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS")
         LocalDateTime.parse(it, formatter)

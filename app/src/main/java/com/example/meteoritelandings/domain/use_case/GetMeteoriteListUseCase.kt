@@ -6,5 +6,6 @@ import javax.inject.Inject
 class GetMeteoriteListUseCase @Inject constructor(
     private val repository: MeteoriteRepository
 ) {
-    operator fun invoke(fullTextSearch: String, order: String) = repository.getMeteoriteList(fullTextSearch, order)
+    operator fun invoke(fullTextSearch: String, order: String) =
+        repository.getMeteoriteList(fullTextSearch, order)
 }

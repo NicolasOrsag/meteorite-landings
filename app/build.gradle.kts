@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("kotlin-kapt")
     id("com.android.application")
@@ -20,6 +22,17 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        // Read the API key from local.properties
+        val properties = Properties()
+        val localPropertiesFile = rootProject.file("local.properties")
+        if (localPropertiesFile.exists()) {
+            localPropertiesFile.inputStream().use { properties.load(it) }
+        }
+        val apiKey = properties.getProperty("MAPS_API_KEY") ?: ""
+
+        // Add the API key to the resource files
+        resValue("string", "maps_api_key", apiKey)
     }
 
     buildTypes {

@@ -62,8 +62,12 @@ class MeteoriteListViewModel @Inject constructor(
         _fullTextSearch.value = text
     }
 
-    fun setSortOption(option: SortOption) {
-        _sortOption.value = option
+    fun toggleSortOption(ascOption: SortOption, descOption: SortOption) {
+        _sortOption.value = if (_sortOption.value == ascOption) {
+            descOption
+        } else {
+            ascOption
+        }
     }
 
 

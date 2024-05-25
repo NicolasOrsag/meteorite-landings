@@ -8,3 +8,9 @@ enum class SortOption(val stringValue: String) {
     YEAR_ASC("year ASC"),
     YEAR_DESC("year DESC")
 }
+
+fun SortOption.isByName() = this.stringValue.contains("name")
+
+fun SortOption.isByMass() = this.stringValue.contains("mass")
+
+fun SortOption.isByYear() = this.stringValue.contains("year")

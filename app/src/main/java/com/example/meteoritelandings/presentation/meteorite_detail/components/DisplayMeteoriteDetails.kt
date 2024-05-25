@@ -28,10 +28,6 @@ fun DisplayMeteoriteDetails(meteorite: Meteorite) {
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary
         )
-        DisplayMeteoriteInfo("Mass", meteorite.mass.toString())
-        DisplayMeteoriteInfo("Year", meteorite.year.toString())
-        DisplayMeteoriteInfo("Fall", meteorite.fall)
-        DisplayMeteoriteInfo("Class", meteorite.recclass)
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -40,5 +36,10 @@ fun DisplayMeteoriteDetails(meteorite: Meteorite) {
                 DisplayMeteoriteOnMap(lat = lat, long = long)
             }
         }
+
+        DisplayMeteoriteInfo("Mass", meteorite.mass.toString())
+        DisplayMeteoriteInfo("Year", meteorite.year.toString())
+        DisplayMeteoriteInfo("Fall", meteorite.fall)
+        DisplayMeteoriteInfo("Class", meteorite.recclass)
     }
 }

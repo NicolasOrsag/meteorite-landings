@@ -17,6 +17,7 @@ fun MeteoriteList(
     meteorites: LazyPagingItems<Meteorite>,
     navController: NavController
 ) {
+
     LazyColumn(
         modifier = Modifier.fillMaxSize()
     ) {

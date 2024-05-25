@@ -1,6 +1,5 @@
 package com.example.meteoritelandings.presentation.meteorite_list.components
 
-import android.graphics.Paint.Align
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -13,11 +12,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.meteoritelandings.domain.model.Meteorite
-import kotlin.math.roundToInt
-
 @Composable
 fun MeteoriteListItem(meteorite: Meteorite, onMeteoriteClick: (String) -> Unit) {
     Row(

@@ -32,8 +32,10 @@ import androidx.navigation.NavController
 import com.example.meteoritelandings.presentation.components.ErrorView
 import com.example.meteoritelandings.presentation.components.LoadingView
 import com.example.meteoritelandings.presentation.meteorite_detail.components.MeteoriteDetailHeader
+import com.example.meteoritelandings.presentation.meteorite_detail.components.MeteoriteDetails
 import com.example.meteoritelandings.presentation.meteorite_detail.components.MeteoriteInfo
 import com.example.meteoritelandings.presentation.meteorite_detail.components.MeteoriteOnMap
+import com.example.meteoritelandings.presentation.navigation.Screen
 
 
 @Composable
@@ -71,31 +73,7 @@ fun MeteoriteDetailScreen(
                             )
                         }
                     }
-                    Text(
-                        text = "Details",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 18.sp,
-                        color = MaterialTheme.colorScheme.onSurface,
-                        modifier = Modifier.padding(16.dp)
-                    )
-
-                    MeteoriteInfo("Mass",
-                        meteorite.mass?.let { "${it}g" } ?: "Unknown",
-                        modifier = Modifier.padding(horizontal = 16.dp))
-                    Spacer(modifier = Modifier.height(8.dp))
-                    MeteoriteInfo(
-                        "Year",
-                        meteorite.year.toString(),
-                        modifier = Modifier.padding(horizontal = 16.dp)
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    MeteoriteInfo(
-                        "Fall", meteorite.fall, modifier = Modifier.padding(horizontal = 16.dp)
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    MeteoriteInfo(
-                        "Class", meteorite.recclass, modifier = Modifier.padding(horizontal = 16.dp)
-                    )
+                    MeteoriteDetails(meteorite = meteorite)
                 }
             }
         }

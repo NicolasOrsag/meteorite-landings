@@ -29,6 +29,8 @@ fun MeteoriteDetailScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
+    val isFavorite by viewModel.isFavorite.collectAsState()
+
     when (val currentState = state) {
         is MeteoriteDetailScreenState.Loading -> {
             LoadingView()
@@ -43,7 +45,10 @@ fun MeteoriteDetailScreen(
                         .background(color = MaterialTheme.colorScheme.surface)
 
                 ) {
-                    MeteoriteDetailHeader(name = it.name) { navController.navigateUp() }
+                    MeteoriteDetailHeader(name = it.name,
+                        isFavorite = isFavorite,
+                        toggleFavorite = viewModel::toggleFavorite,
+                        onBackPressed = { navController.navigateUp() })
 
                     Spacer(modifier = Modifier.height(16.dp))
 

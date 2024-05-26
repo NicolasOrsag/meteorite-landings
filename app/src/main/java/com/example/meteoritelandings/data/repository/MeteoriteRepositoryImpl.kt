@@ -5,6 +5,8 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.meteoritelandings.common.Constants.PAGE_SIZE
 import com.example.meteoritelandings.common.Resource
+import com.example.meteoritelandings.data.local.databse.FavoriteMeteorite
+import com.example.meteoritelandings.data.local.databse.FavoriteMeteoriteDao
 import com.example.meteoritelandings.data.pagination.MeteoritePagingSource
 import com.example.meteoritelandings.data.remote.MeteoriteApi
 import com.example.meteoritelandings.data.remote.dto.toMeteorite
@@ -18,7 +20,8 @@ import javax.inject.Inject
 
 @ActivityScoped
 class MeteoriteRepositoryImpl @Inject constructor(
-    private val api: MeteoriteApi
+    private val api: MeteoriteApi,
+    private val favoriteMeteoriteDao: FavoriteMeteoriteDao
 ) : MeteoriteRepository {
 
 
@@ -43,5 +46,18 @@ class MeteoriteRepositoryImpl @Inject constructor(
             }
         }.flowOn(Dispatchers.IO)
     }
+
+    override suspend fun addFavoriteMeteorite(meteorite: Meteorite) {
+        return favoriteMeteoriteDao.insertFavoriteMeteorite(meteorite)
+    }
+
+    override suspend fun deleteFavoriteMeteorite(meteorite: Meteorite) {
+        return favoriteMeteoriteDao.deleteFavoriteMeteoriteById(meteorite.id)
+    }
+
+    override fun getFavoriteMeteorites(): Flow<List<Meteorite>> {
+        return favoriteMeteoriteDao.getAllFavoriteMeteorites()
+    }
+
 
 }

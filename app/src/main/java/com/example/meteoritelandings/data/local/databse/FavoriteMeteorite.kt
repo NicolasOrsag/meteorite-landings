@@ -1,12 +1,12 @@
-package com.example.meteoritelandings.domain.model
+package com.example.meteoritelandings.data.local.databse
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "favorite_meteorites")
-data class Meteorite(
-    val fall: String,
+data class FavoriteMeteorite(
     @PrimaryKey val id: String,
+    val fall: String,
     val mass: Int?,
     val name: String,
     val nametype: String,

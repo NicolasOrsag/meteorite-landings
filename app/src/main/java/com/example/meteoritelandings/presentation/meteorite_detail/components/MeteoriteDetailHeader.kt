@@ -12,6 +12,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.rounded.ArrowBack
+import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.FavoriteBorder
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -25,7 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun MeteoriteDetailHeader(name: String, onBackPressed: () -> Unit) {
+fun MeteoriteDetailHeader(name: String, isFavorite: Boolean, onBackPressed: () -> Unit, toggleFavorite: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -55,11 +56,11 @@ fun MeteoriteDetailHeader(name: String, onBackPressed: () -> Unit) {
         )
         Spacer(modifier = Modifier.width(16.dp))
         IconButton(
-            onClick = { },
+            onClick = {toggleFavorite()},
             modifier = Modifier.weight(0.1f)
         ) {
             Icon(
-                imageVector = Icons.Rounded.FavoriteBorder,
+                imageVector = if(isFavorite) Icons.Rounded.Favorite else Icons.Rounded.FavoriteBorder,
                 contentDescription = "Favourite",
                 tint = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.size(28.dp)

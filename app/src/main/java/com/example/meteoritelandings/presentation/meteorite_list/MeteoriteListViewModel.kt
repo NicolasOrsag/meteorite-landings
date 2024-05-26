@@ -6,7 +6,9 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.filter
+import com.example.meteoritelandings.data.local.databse.FavoriteMeteorite
 import com.example.meteoritelandings.domain.model.Meteorite
+import com.example.meteoritelandings.domain.use_case.GetFavoriteMeteoritesUseCase
 import com.example.meteoritelandings.domain.use_case.GetMeteoriteListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -22,6 +24,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MeteoriteListViewModel @Inject constructor(
     private val getMeteoriteListUseCase: GetMeteoriteListUseCase,
+    private val getFavoriteMeteoritesUseCase: GetFavoriteMeteoritesUseCase
 ) : ViewModel() {
 
     private val _fullTextSearch = MutableStateFlow("")
@@ -30,19 +33,31 @@ class MeteoriteListViewModel @Inject constructor(
     private val _sortOption = MutableStateFlow(SortOption.NAME_ASC)
     val sortOption: StateFlow<SortOption> = _sortOption
 
+    private val _viewFavorites = MutableStateFlow(false)
+    val viewFavorites: StateFlow<Boolean> = _viewFavorites
+
+    private val favoriteMeteorites: Flow<List<Meteorite>> = getFavoriteMeteoritesUseCase()
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val meteorites: Flow<PagingData<Meteorite>> = combine(
         _fullTextSearch,
-        _sortOption
-    ) { searchText, sortOption ->
-        Pair(searchText, sortOption)
-    }.flatMapLatest { (searchText, sortOption) ->
-        getMeteoriteListUseCase(searchText, sortOption.stringValue)
-            .map { pagingData ->
-                applyFilters(pagingData, sortOption.stringValue)
+        _sortOption,
+        _viewFavorites
+    ) { searchText, sortOption, viewFavorites ->
+        Triple(searchText, sortOption, viewFavorites)
+    }.flatMapLatest { (searchText, sortOption, viewFavorites) ->
+        if (viewFavorites) {
+            // Map favorite meteorites to PagingData format
+            favoriteMeteorites.map {
+                PagingData.from(it)
             }
-            .cachedIn(viewModelScope)
+        } else {
+            getMeteoriteListUseCase(searchText, sortOption.stringValue)
+                .map { pagingData ->
+                    applyFilters(pagingData, sortOption.stringValue)
+                }
+                .cachedIn(viewModelScope)
+        }
     }
 
     private fun applyFilters(
@@ -68,6 +83,10 @@ class MeteoriteListViewModel @Inject constructor(
         } else {
             ascOption
         }
+    }
+
+    fun setFavoriteMeteorites(){
+        _viewFavorites.value = !_viewFavorites.value
     }
 
 

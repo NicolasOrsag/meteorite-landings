@@ -86,8 +86,8 @@ dependencies {
     //navigation
     implementation("androidx.navigation:navigation-compose:2.7.7")
 
-    //dagerhilt
-    implementation("com.google.dagger:hilt-android:2.46")
+    //daggerHilt
+    implementation("com.google.dagger:hilt-android:2.49")
     kapt("com.google.dagger:hilt-android-compiler:2.46")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
@@ -102,6 +102,11 @@ dependencies {
     //maps
     implementation("com.google.maps.android:maps-compose:2.0.0")
     implementation("com.google.android.gms:play-services-maps:18.2.0")
+
+    //room
+    implementation("androidx.room:room-runtime:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
 
 
 }

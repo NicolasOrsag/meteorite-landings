@@ -2,6 +2,7 @@ package com.example.meteoritelandings.data.repository
 
 import androidx.paging.PagingData
 import com.example.meteoritelandings.common.Resource
+import com.example.meteoritelandings.data.local.databse.FavoriteMeteorite
 import com.example.meteoritelandings.domain.model.Meteorite
 import kotlinx.coroutines.flow.Flow
 
@@ -13,5 +14,10 @@ interface MeteoriteRepository {
     ): Flow<PagingData<Meteorite>>
 
     fun getMeteorite(name: String): Flow<Resource<Meteorite>>
+
+
+    suspend fun addFavoriteMeteorite(meteorite: Meteorite)
+    suspend fun deleteFavoriteMeteorite(meteorite: Meteorite)
+    fun getFavoriteMeteorites(): Flow<List<Meteorite>>
 
 }

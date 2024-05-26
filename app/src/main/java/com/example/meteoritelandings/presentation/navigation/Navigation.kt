@@ -24,7 +24,7 @@ fun Navigation() {
                 type = NavType.StringType
             })
         ) {
-            MeteoriteDetailScreen(name = it.arguments?.getString("name"))
+            MeteoriteDetailScreen(name = it.arguments?.getString("name"), navController = navController)
         }
     }
 }

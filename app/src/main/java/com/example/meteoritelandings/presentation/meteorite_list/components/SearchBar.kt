@@ -22,7 +22,7 @@ fun SearchBar(
         value = text,
         onValueChange = onTextChange,
         modifier = Modifier.fillMaxWidth(),
-        placeholder = { Text("Search meteorites...", color = MaterialTheme.colorScheme.tertiary) },
+        placeholder = { Text("Search meteorites...", color = MaterialTheme.colorScheme.tertiary, style = MaterialTheme.typography.bodyMedium) },
         colors = TextFieldDefaults.colors(
             focusedContainerColor = MaterialTheme.colorScheme.surface,
             unfocusedContainerColor = MaterialTheme.colorScheme.surface,

@@ -18,8 +18,7 @@ fun MeteoriteDetails(meteorite: Meteorite) {
     Column {
         Text(
             text = "Details",
-            fontWeight = FontWeight.Bold,
-            fontSize = 18.sp,
+            style = MaterialTheme.typography.titleSmall,
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.padding(16.dp)
         )

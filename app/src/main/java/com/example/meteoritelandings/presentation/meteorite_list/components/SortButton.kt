@@ -44,7 +44,8 @@ fun SortButton(
                 .padding(vertical = 8.dp)) {
             Text(
                 text = label,
-                color = if (isSelected) MaterialTheme.colorScheme.onSecondary else MaterialTheme.colorScheme.primary
+                color = if (isSelected) MaterialTheme.colorScheme.onSecondary else MaterialTheme.colorScheme.primary,
+                style = MaterialTheme.typography.bodyMedium
             )
             Icon(
                 imageVector = if (isDesc) Icons.Rounded.KeyboardArrowUp else Icons.Rounded.KeyboardArrowDown,

@@ -32,7 +32,7 @@ fun MeteoriteListItem(meteorite: Meteorite, onMeteoriteClick: (String) -> Unit) 
         Column(modifier = Modifier.weight(1f)) {
             Text(
                 text = meteorite.name,
-                style = MaterialTheme.typography.headlineSmall,
+                style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onSurface
             )
         }
@@ -43,12 +43,12 @@ fun MeteoriteListItem(meteorite: Meteorite, onMeteoriteClick: (String) -> Unit) 
             horizontalAlignment = Alignment.End
         ) {
             Text(text = "Mass: ${meteorite.mass?.let { "${it}g" } ?: "Unknown"}",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f))
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.tertiary)
             Text(
                 text = "Year: ${meteorite.year ?: "Unknown"}",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.tertiary
             )
         }
     }

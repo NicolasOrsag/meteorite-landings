@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.rounded.ArrowBack
+import androidx.compose.material.icons.rounded.FavoriteBorder
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -37,7 +39,7 @@ fun MeteoriteDetailHeader(name: String, onBackPressed: () -> Unit) {
             modifier = Modifier.weight(0.1f)
         ) {
             Icon(
-                imageVector = Icons.Default.ArrowBack,
+                imageVector = Icons.Rounded.ArrowBack,
                 contentDescription = "Back",
                 tint = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.size(28.dp)
@@ -46,8 +48,7 @@ fun MeteoriteDetailHeader(name: String, onBackPressed: () -> Unit) {
         Spacer(modifier = Modifier.width(16.dp))
         Text(
             text = name,
-            style = MaterialTheme.typography.headlineMedium,
-            fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.titleLarge,
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.weight(0.8f),
             textAlign = TextAlign.Center
@@ -58,7 +59,7 @@ fun MeteoriteDetailHeader(name: String, onBackPressed: () -> Unit) {
             modifier = Modifier.weight(0.1f)
         ) {
             Icon(
-                imageVector = Icons.Default.FavoriteBorder,
+                imageVector = Icons.Rounded.FavoriteBorder,
                 contentDescription = "Favourite",
                 tint = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.size(28.dp)

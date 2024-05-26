@@ -29,14 +29,13 @@ fun MeteoriteInfo(label: String, value: String, modifier: Modifier = Modifier) {
     ) {
         Text(
             text = "$label: ",
-            fontSize = 16.sp,
+            style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.padding(start = 16.dp)
         )
         Text(
             text = value,
-            fontWeight = FontWeight.Bold,
-            fontSize = 16.sp,
+            style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.padding(end = 16.dp)
         )

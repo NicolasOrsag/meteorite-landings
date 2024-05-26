@@ -1,41 +1,24 @@
 package com.example.meteoritelandings.presentation.meteorite_detail
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.meteoritelandings.presentation.components.ErrorView
 import com.example.meteoritelandings.presentation.components.LoadingView
 import com.example.meteoritelandings.presentation.meteorite_detail.components.MeteoriteDetailHeader
 import com.example.meteoritelandings.presentation.meteorite_detail.components.MeteoriteDetails
-import com.example.meteoritelandings.presentation.meteorite_detail.components.MeteoriteInfo
 import com.example.meteoritelandings.presentation.meteorite_detail.components.MeteoriteOnMap
-import com.example.meteoritelandings.presentation.navigation.Screen
 
 
 @Composable

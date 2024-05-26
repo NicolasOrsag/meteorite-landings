@@ -23,7 +23,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun MeteoriteDetailHeader(name: String, onBackPressed: () -> Unit){
+fun MeteoriteDetailHeader(name: String, onBackPressed: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -54,7 +54,7 @@ fun MeteoriteDetailHeader(name: String, onBackPressed: () -> Unit){
         )
         Spacer(modifier = Modifier.width(16.dp))
         IconButton(
-            onClick = {  },
+            onClick = { },
             modifier = Modifier.weight(0.1f)
         ) {
             Icon(

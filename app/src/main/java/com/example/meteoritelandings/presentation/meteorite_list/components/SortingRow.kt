@@ -12,7 +12,7 @@ import com.example.meteoritelandings.presentation.meteorite_list.isByName
 import com.example.meteoritelandings.presentation.meteorite_list.isByYear
 
 @Composable
-fun SortingRow(sortOption: SortOption, toggleSortOption: (SortOption, SortOption) -> Unit){
+fun SortingRow(sortOption: SortOption, toggleSortOption: (SortOption, SortOption) -> Unit) {
     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         SortButton(
             onClick = {

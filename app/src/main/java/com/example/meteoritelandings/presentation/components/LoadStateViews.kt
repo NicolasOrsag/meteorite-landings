@@ -25,7 +25,10 @@ fun LoadingView() {
     Box(
         contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()
     ) {
-        CircularProgressIndicator(modifier = Modifier.padding(8.dp), color = MaterialTheme.colorScheme.onSurface)
+        CircularProgressIndicator(
+            modifier = Modifier.padding(8.dp),
+            color = MaterialTheme.colorScheme.onSurface
+        )
     }
 }
 

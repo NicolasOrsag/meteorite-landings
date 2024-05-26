@@ -35,22 +35,26 @@ fun MeteoriteListScreen(
     val text by viewModel.fullTextSearch.collectAsState()
     val sortOption by viewModel.sortOption.collectAsState()
 
-    Scaffold(topBar = { MeteoriteListTopAppBar() }) { paddingValues ->
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+    ) {
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .background(MaterialTheme.colorScheme.background)
-                .padding(16.dp)
+                .background(MaterialTheme.colorScheme.primary)
+                .padding(16.dp, 16.dp, 16.dp, 0.dp)
         ) {
             SearchBar(text = text, onTextChange = viewModel::setFullTextSearch)
 
             SortingRow(sortOption = sortOption, toggleSortOption = viewModel::toggleSortOption)
-
-            MeteoriteList(
-                meteorites = meteorites, navController = navController
-            )
         }
+
+        MeteoriteList(
+            meteorites = meteorites,
+            navController = navController,
+            modifier = Modifier.padding(horizontal = 16.dp)
+        )
     }
 }
 

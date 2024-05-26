@@ -12,6 +12,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.meteoritelandings.presentation.theme.MeteoriteLandingsTheme
 
 @Composable
 fun DisplayMeteoriteInfo(label: String, value: String) {
@@ -36,7 +37,7 @@ fun DisplayMeteoriteInfo(label: String, value: String) {
 @Preview(showBackground = true)
 @Composable
 fun DisplayMeteoriteInfoPreview() {
-    MaterialTheme {
+    MeteoriteLandingsTheme {
         DisplayMeteoriteInfo(label = "Mass", value = "120")
     }
 }

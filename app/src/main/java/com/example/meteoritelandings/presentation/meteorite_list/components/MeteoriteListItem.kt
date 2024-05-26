@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.example.meteoritelandings.domain.model.Meteorite
 
@@ -20,7 +21,8 @@ fun MeteoriteListItem(meteorite: Meteorite, onMeteoriteClick: (String) -> Unit) 
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp)
+            .padding(vertical = 12.dp)
+            .clip(MaterialTheme.shapes.extraLarge)
             .background(MaterialTheme.colorScheme.surface)
             .padding(16.dp)
             .clickable(onClick = { onMeteoriteClick(meteorite.name) }),

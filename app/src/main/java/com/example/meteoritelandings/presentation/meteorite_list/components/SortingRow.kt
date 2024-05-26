@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.example.meteoritelandings.presentation.meteorite_list.SortOption
 import com.example.meteoritelandings.presentation.meteorite_list.isByMass
 import com.example.meteoritelandings.presentation.meteorite_list.isByName
@@ -12,7 +13,7 @@ import com.example.meteoritelandings.presentation.meteorite_list.isByYear
 
 @Composable
 fun SortingRow(sortOption: SortOption, toggleSortOption: (SortOption, SortOption) -> Unit){
-    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
+    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         SortButton(
             onClick = {
                 toggleSortOption(

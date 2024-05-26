@@ -4,8 +4,17 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Favorite
+import androidx.compose.material.icons.rounded.List
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemColors
+import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -16,6 +25,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.meteoritelandings.presentation.meteorite_list.components.MeteoriteList
+import com.example.meteoritelandings.presentation.meteorite_list.components.NavigationBottomBar
 import com.example.meteoritelandings.presentation.meteorite_list.components.SearchBar
 import com.example.meteoritelandings.presentation.meteorite_list.components.SortingRow
 
@@ -26,33 +36,39 @@ fun MeteoriteListScreen(
     val meteorites = viewModel.meteorites.collectAsLazyPagingItems()
     val text by viewModel.fullTextSearch.collectAsState()
     val sortOption by viewModel.sortOption.collectAsState()
+    val viewFavorites by viewModel.viewFavorites.collectAsState()
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.surface)
-    ) {
+
+    Scaffold(bottomBar = {
+        NavigationBottomBar(
+            viewFavorites = viewFavorites, setFavoriteMeteorites = viewModel::setFavoriteMeteorites
+        )
+    }) { paddingValues ->
         Column(
             modifier = Modifier
-                .background(MaterialTheme.colorScheme.primary)
-                .padding(16.dp, 16.dp, 16.dp, 0.dp)
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.surface)
+                .padding(paddingValues)
         ) {
-            SearchBar(text = text, onTextChange = viewModel::setFullTextSearch)
+            Column(
+                modifier = Modifier
+                    .background(MaterialTheme.colorScheme.primary)
+                    .padding(16.dp, 16.dp, 16.dp, 0.dp)
+            ) {
+                SearchBar(text = text, onTextChange = viewModel::setFullTextSearch)
 
-            SortingRow(sortOption = sortOption, toggleSortOption = viewModel::toggleSortOption)
-
-            Button(onClick = {viewModel.setFavoriteMeteorites()}) {
-                Text("Favorites")
+                SortingRow(sortOption = sortOption, toggleSortOption = viewModel::toggleSortOption)
 
             }
-        }
 
-        MeteoriteList(
-            meteorites = meteorites,
-            navController = navController,
-            modifier = Modifier.padding(horizontal = 16.dp)
-        )
+            MeteoriteList(
+                meteorites = meteorites,
+                navController = navController,
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+            )
+        }
     }
+
 }
 
 

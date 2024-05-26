@@ -85,8 +85,8 @@ class MeteoriteListViewModel @Inject constructor(
         }
     }
 
-    fun setFavoriteMeteorites(){
-        _viewFavorites.value = !_viewFavorites.value
+    fun setFavoriteMeteorites(value :Boolean){
+        _viewFavorites.value = value
     }
 
 

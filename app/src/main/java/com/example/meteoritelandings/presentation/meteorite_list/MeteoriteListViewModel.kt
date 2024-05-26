@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.filter
-import com.example.meteoritelandings.data.local.databse.FavoriteMeteorite
 import com.example.meteoritelandings.domain.model.Meteorite
 import com.example.meteoritelandings.domain.use_case.GetFavoriteMeteoritesUseCase
 import com.example.meteoritelandings.domain.use_case.GetMeteoriteListUseCase
@@ -14,10 +13,12 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 
@@ -36,8 +37,6 @@ class MeteoriteListViewModel @Inject constructor(
     private val _viewFavorites = MutableStateFlow(false)
     val viewFavorites: StateFlow<Boolean> = _viewFavorites
 
-    private val favoriteMeteorites: Flow<List<Meteorite>> = getFavoriteMeteoritesUseCase()
-
     @OptIn(ExperimentalCoroutinesApi::class)
     val meteorites: Flow<PagingData<Meteorite>> = combine(
         _fullTextSearch,
@@ -47,10 +46,11 @@ class MeteoriteListViewModel @Inject constructor(
         Triple(searchText, sortOption, viewFavorites)
     }.flatMapLatest { (searchText, sortOption, viewFavorites) ->
         if (viewFavorites) {
-            // Map favorite meteorites to PagingData format
-            favoriteMeteorites.map {
-                PagingData.from(it)
-            }
+            getFavoriteMeteoritesUseCase(sortOption)
+                .map {
+                    applyFilters(PagingData.from(it), sortOption.stringValue)
+                }
+                .cachedIn(viewModelScope)
         } else {
             getMeteoriteListUseCase(searchText, sortOption.stringValue)
                 .map { pagingData ->

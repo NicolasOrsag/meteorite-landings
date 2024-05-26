@@ -5,12 +5,12 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.meteoritelandings.common.Constants.PAGE_SIZE
 import com.example.meteoritelandings.common.Resource
-import com.example.meteoritelandings.data.local.databse.FavoriteMeteorite
 import com.example.meteoritelandings.data.local.databse.FavoriteMeteoriteDao
 import com.example.meteoritelandings.data.pagination.MeteoritePagingSource
 import com.example.meteoritelandings.data.remote.MeteoriteApi
 import com.example.meteoritelandings.data.remote.dto.toMeteorite
 import com.example.meteoritelandings.domain.model.Meteorite
+import com.example.meteoritelandings.presentation.meteorite_list.SortOption
 import dagger.hilt.android.scopes.ActivityScoped
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -55,8 +55,15 @@ class MeteoriteRepositoryImpl @Inject constructor(
         return favoriteMeteoriteDao.deleteFavoriteMeteoriteById(meteorite.id)
     }
 
-    override fun getFavoriteMeteorites(): Flow<List<Meteorite>> {
-        return favoriteMeteoriteDao.getAllFavoriteMeteorites()
+    override fun getFavoriteMeteorites(sortOption: SortOption): Flow<List<Meteorite>> {
+        return when (sortOption) {
+            SortOption.NAME_ASC -> favoriteMeteoriteDao.getFavoriteMeteoritesByNameAsc()
+            SortOption.NAME_DESC -> favoriteMeteoriteDao.getFavoriteMeteoritesByNameDesc()
+            SortOption.MASS_ASC -> favoriteMeteoriteDao.getFavoriteMeteoritesByMassAsc()
+            SortOption.MASS_DESC -> favoriteMeteoriteDao.getFavoriteMeteoritesByMassDesc()
+            SortOption.YEAR_ASC -> favoriteMeteoriteDao.getFavoriteMeteoritesByYearAsc()
+            SortOption.YEAR_DESC -> favoriteMeteoriteDao.getFavoriteMeteoritesByYearDesc()
+        }
     }
 
 

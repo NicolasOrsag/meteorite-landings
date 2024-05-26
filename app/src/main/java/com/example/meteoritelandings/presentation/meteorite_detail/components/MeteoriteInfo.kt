@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.sp
 import com.example.meteoritelandings.presentation.theme.MeteoriteLandingsTheme
 
 @Composable
-fun DisplayMeteoriteInfo(label: String, value: String) {
+fun MeteoriteInfo(label: String, value: String) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -36,8 +36,8 @@ fun DisplayMeteoriteInfo(label: String, value: String) {
 
 @Preview(showBackground = true)
 @Composable
-fun DisplayMeteoriteInfoPreview() {
+fun MeteoriteInfoPreview() {
     MeteoriteLandingsTheme {
-        DisplayMeteoriteInfo(label = "Mass", value = "120")
+        MeteoriteInfo(label = "Mass", value = "120")
     }
 }

@@ -30,7 +30,8 @@ fun SortButton(
         modifier = modifier
             .padding(vertical = 16.dp)
             .background(
-                color = MaterialTheme.colorScheme.surface, shape = MaterialTheme.shapes.extraLarge
+                color = if (isSelected) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.onPrimary,
+                shape = MaterialTheme.shapes.extraLarge
             )
             .clickable { onClick() },
         contentAlignment = Alignment.Center
@@ -44,11 +45,11 @@ fun SortButton(
                 .padding(vertical = 8.dp)) {
             Text(
                 text = label,
-                color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
+                color = if (isSelected) MaterialTheme.colorScheme.onSecondary else MaterialTheme.colorScheme.primary
             )
             Icon(
                 imageVector = if (isDesc) Icons.Rounded.KeyboardArrowUp else Icons.Rounded.KeyboardArrowDown,
-                tint = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
+                tint = if (isSelected) MaterialTheme.colorScheme.onSecondary else MaterialTheme.colorScheme.primary,
                 contentDescription = null
             )
         }

@@ -23,20 +23,20 @@ fun SearchBar(
     TextField(
         value = text,
         onValueChange = onTextChange,
-        modifier = Modifier
-            .fillMaxWidth(),
-        placeholder = { Text("Search meteorites...") },
+        modifier = Modifier.fillMaxWidth(),
+        placeholder = { Text("Search meteorites...", color = MaterialTheme.colorScheme.tertiary) },
         colors = TextFieldDefaults.colors(
             focusedContainerColor = MaterialTheme.colorScheme.surface,
             unfocusedContainerColor = MaterialTheme.colorScheme.surface,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
-            cursorColor = MaterialTheme.colorScheme.primary,
+            cursorColor = MaterialTheme.colorScheme.onSurface
         ),
         leadingIcon = {
             Icon(
                 imageVector = Icons.Default.Search,
-                contentDescription = "Search Icon"
+                contentDescription = "Search Icon",
+                tint = MaterialTheme.colorScheme.onSurface
             )
         },
         shape = MaterialTheme.shapes.extraLarge

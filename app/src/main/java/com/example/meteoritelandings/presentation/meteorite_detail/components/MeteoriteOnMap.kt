@@ -16,7 +16,7 @@ import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
 
 @Composable
-fun DisplayMeteoriteOnMap(lat: Double, long: Double) {
+fun MeteoriteOnMap(lat: Double, long: Double) {
     val meteoritePosition = LatLng(lat, long)
     val cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(

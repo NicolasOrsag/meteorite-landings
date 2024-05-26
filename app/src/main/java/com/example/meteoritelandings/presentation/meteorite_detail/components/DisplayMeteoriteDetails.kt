@@ -15,31 +15,5 @@ import com.example.meteoritelandings.domain.model.Meteorite
 
 @Composable
 fun DisplayMeteoriteDetails(meteorite: Meteorite) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        Spacer(modifier = Modifier.height(16.dp))
 
-        Text(
-            text = meteorite.name ?: "",
-            style = MaterialTheme.typography.headlineMedium,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.primary
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        meteorite.reclat?.toDouble()?.let { lat ->
-            meteorite.reclong?.toDouble()?.let { long ->
-                DisplayMeteoriteOnMap(lat = lat, long = long)
-            }
-        }
-
-        DisplayMeteoriteInfo("Mass", meteorite.mass.toString())
-        DisplayMeteoriteInfo("Year", meteorite.year.toString())
-        DisplayMeteoriteInfo("Fall", meteorite.fall)
-        DisplayMeteoriteInfo("Class", meteorite.recclass)
-    }
 }

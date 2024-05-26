@@ -23,7 +23,7 @@ fun MeteoriteListItem(meteorite: Meteorite, onMeteoriteClick: (String) -> Unit) 
             .fillMaxWidth()
             .padding(vertical = 12.dp)
             .clip(MaterialTheme.shapes.extraLarge)
-            .background(MaterialTheme.colorScheme.surface)
+            .background(MaterialTheme.colorScheme.primary)
             .padding(16.dp)
             .clickable(onClick = { onMeteoriteClick(meteorite.name) }),
         horizontalArrangement = Arrangement.SpaceBetween,

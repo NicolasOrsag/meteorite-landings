@@ -15,7 +15,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -80,14 +79,13 @@ class MeteoriteDetailViewModel @Inject constructor(
         }
     }
 
-    fun toggleFavorite(){
-        if(_isFavorite.value){
-            viewModelScope.launch{
+    fun toggleFavorite() {
+        if (_isFavorite.value) {
+            viewModelScope.launch {
                 _state.value.meteorite?.let { deleteFavoriteMeteoriteUseCase(it) }
             }
-        }
-        else{
-            viewModelScope.launch{
+        } else {
+            viewModelScope.launch {
                 _state.value.meteorite?.let { addFavoriteMeteoriteUseCase(it) }
             }
         }

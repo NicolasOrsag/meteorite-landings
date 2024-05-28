@@ -3,7 +3,6 @@ package com.example.meteoritelandings.data.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.example.meteoritelandings.common.Constants.PAGE_SIZE
 import com.example.meteoritelandings.common.Resource
 import com.example.meteoritelandings.data.local.databse.FavoriteMeteoriteDao
 import com.example.meteoritelandings.data.pagination.MeteoritePagingSource
@@ -18,13 +17,13 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
+private const val PAGE_SIZE = 20
+
 @ActivityScoped
 class MeteoriteRepositoryImpl @Inject constructor(
     private val api: MeteoriteApi,
     private val favoriteMeteoriteDao: FavoriteMeteoriteDao
 ) : MeteoriteRepository {
-
-
     override fun getMeteoriteList(
         fullTextSearch: String,
         order: String

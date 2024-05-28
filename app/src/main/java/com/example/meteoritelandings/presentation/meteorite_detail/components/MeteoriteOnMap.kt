@@ -1,5 +1,6 @@
 package com.example.meteoritelandings.presentation.meteorite_detail.components
 
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -27,7 +28,7 @@ fun MeteoriteOnMap(lat: Double, long: Double, modifier: Modifier) {
     Card(
         shape = MaterialTheme.shapes.extraLarge, modifier = modifier
             .fillMaxWidth()
-            .height(300.dp)
+            .fillMaxHeight()
     ) {
         GoogleMap(
             modifier = Modifier.fillMaxSize(), cameraPositionState = cameraPositionState

@@ -2,6 +2,7 @@ package com.example.meteoritelandings.presentation.meteorite_list.components
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
@@ -12,12 +13,14 @@ import com.example.meteoritelandings.presentation.util.handleLoadState
 
 @Composable
 fun MeteoriteList(
+    listState: LazyListState,
     meteorites: LazyPagingItems<Meteorite>,
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
 
     LazyColumn(
+        state = listState,
         modifier = modifier.fillMaxSize()
     ) {
         handleLoadState(meteorites.loadState.refresh, meteorites)

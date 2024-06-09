@@ -11,12 +11,13 @@ import com.example.meteoritelandings.domain.use_case.GetFavoriteMeteoritesUseCas
 import com.example.meteoritelandings.domain.use_case.GetMeteoriteListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 
@@ -36,7 +37,7 @@ class MeteoriteListViewModel @Inject constructor(
     val viewFavorites: StateFlow<Boolean> = _viewFavorites
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val meteorites: Flow<PagingData<Meteorite>> = combine(
+    val meteorites: StateFlow<PagingData<Meteorite>> = combine(
         _fullTextSearch,
         _sortOption,
         _viewFavorites
@@ -56,7 +57,7 @@ class MeteoriteListViewModel @Inject constructor(
                 }
                 .cachedIn(viewModelScope)
         }
-    }
+    }.stateIn(viewModelScope, SharingStarted.Eagerly, PagingData.empty())
 
     private fun applyFilters(
         pagingData: PagingData<Meteorite>,

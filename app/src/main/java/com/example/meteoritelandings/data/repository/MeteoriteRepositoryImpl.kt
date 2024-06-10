@@ -15,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 private const val PAGE_SIZE = 20
@@ -47,11 +48,15 @@ class MeteoriteRepositoryImpl @Inject constructor(
     }
 
     override suspend fun addFavoriteMeteorite(meteorite: Meteorite) {
-        return favoriteMeteoriteDao.insertFavoriteMeteorite(meteorite)
+        withContext(Dispatchers.IO) {
+            favoriteMeteoriteDao.insertFavoriteMeteorite(meteorite)
+        }
     }
 
     override suspend fun deleteFavoriteMeteorite(meteorite: Meteorite) {
-        return favoriteMeteoriteDao.deleteFavoriteMeteoriteById(meteorite.id)
+        withContext(Dispatchers.IO){
+            favoriteMeteoriteDao.deleteFavoriteMeteoriteById(meteorite.id)
+        }
     }
 
     override fun getFavoriteMeteorites(sortOption: SortOption): Flow<List<Meteorite>> {
@@ -62,7 +67,7 @@ class MeteoriteRepositoryImpl @Inject constructor(
             SortOption.MASS_DESC -> favoriteMeteoriteDao.getFavoriteMeteoritesByMassDesc()
             SortOption.YEAR_ASC -> favoriteMeteoriteDao.getFavoriteMeteoritesByYearAsc()
             SortOption.YEAR_DESC -> favoriteMeteoriteDao.getFavoriteMeteoritesByYearDesc()
-        }
+        }.flowOn(Dispatchers.IO)
     }
 
 

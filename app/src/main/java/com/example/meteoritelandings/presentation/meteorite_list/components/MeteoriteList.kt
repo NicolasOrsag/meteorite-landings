@@ -13,6 +13,7 @@ import com.example.meteoritelandings.presentation.util.handleLoadState
 
 @Composable
 fun MeteoriteList(
+    favorites: Boolean,
     listState: LazyListState,
     meteorites: LazyPagingItems<Meteorite>,
     navController: NavController,
@@ -23,8 +24,10 @@ fun MeteoriteList(
         state = listState,
         modifier = modifier.fillMaxSize()
     ) {
-        handleLoadState(meteorites.loadState.refresh, meteorites)
-        handleLoadState(meteorites.loadState.prepend, meteorites)
+        if(!favorites){
+            handleLoadState(meteorites.loadState.refresh, meteorites)
+            handleLoadState(meteorites.loadState.prepend, meteorites)
+        }
         items(meteorites.itemCount) { index ->
             meteorites[index]?.let { meteorite ->
                 MeteoriteListItem(
@@ -35,6 +38,8 @@ fun MeteoriteList(
                 )
             }
         }
-        handleLoadState(meteorites.loadState.append, meteorites)
+        if(!favorites) {
+            handleLoadState(meteorites.loadState.append, meteorites)
+        }
     }
 }

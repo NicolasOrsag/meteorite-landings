@@ -12,9 +12,11 @@ import com.example.meteoritelandings.domain.use_case.GetMeteoriteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -32,25 +34,19 @@ class MeteoriteDetailViewModel @Inject constructor(
         MutableStateFlow(MeteoriteDetailScreenState.Loading())
     val state: StateFlow<MeteoriteDetailScreenState> = _state
 
-    private val favoriteMeteorites: Flow<List<Meteorite>> = getFavoriteMeteoritesUseCase()
-
     private val _name: MutableStateFlow<String?> = MutableStateFlow(null)
     val name: StateFlow<String?> = _name
 
-    private val _isFavorite: MutableStateFlow<Boolean> = MutableStateFlow(false)
-    val isFavorite: StateFlow<Boolean> = _isFavorite
+    private val favoriteMeteorites: Flow<List<Meteorite>> = getFavoriteMeteoritesUseCase()
+
+    val isFavorite: StateFlow<Boolean> =
+        favoriteMeteorites.map { favoriteMeteorites -> favoriteMeteorites.any { it.name == name.value } }
+            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
 
     init {
         savedStateHandle.get<String>("name")?.let {
             _name.value = it
             getMeteorite(it)
-        }
-        viewModelScope.launch {
-            combine(name, favoriteMeteorites) { meteoriteName, favoriteList ->
-                favoriteList.any { it.name == meteoriteName }
-            }.collect {
-                _isFavorite.value = it
-            }
         }
     }
 
@@ -80,7 +76,7 @@ class MeteoriteDetailViewModel @Inject constructor(
     }
 
     fun toggleFavorite() {
-        if (_isFavorite.value) {
+        if (isFavorite.value) {
             viewModelScope.launch {
                 _state.value.meteorite?.let { deleteFavoriteMeteoriteUseCase(it) }
             }

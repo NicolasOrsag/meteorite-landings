@@ -69,6 +69,7 @@ fun MeteoriteListScreen(
             }
 
             MeteoriteList(
+                favorites = viewFavorites,
                 listState = listState,
                 meteorites = meteorites,
                 navController = navController,
